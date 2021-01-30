@@ -1,25 +1,27 @@
 # frozen_string_literal: true
 
+# Kittens resource controller
 class KittensController < ApplicationController
   def index
     @kittens = Kitten.all
   end
 
   def show
-    @kitten = Kitten.find(params[:id])  
+    @kitten = Kitten.find(params[:id])
   end
 
   def new
-    @kitten = Kitten.new  
+    @kitten = Kitten.new
   end
-  
+
   def create
     @kitten = Kitten.new(kitten_params)
     if @kitten.save
       redirect_to @kitten, success: 'Kitten succesfully created.'
     else
-      render :new, alert: 'This kitten could not be created.' 
-    end  
+      flash.now[:alert] = 'This kitten could not be created.'
+      render :new
+    end
   end
 
   def edit
@@ -29,22 +31,23 @@ class KittensController < ApplicationController
   def update
     @kitten = Kitten.find(params[:id])
     if @kitten.update(kitten_params)
-      redirect_to @kitten, success: 'Kitten succesfully updated.'
+      redirect_to @kitten, flash: { success: 'Kitten succesfully updated.' }
     else
-      render :edit, alert: 'This kitten could not be updated.'
+      flash.now[:alert] = 'This kitten could not be updated.'
+      render :edit
     end
   end
-  
+
   def destroy
-    kitten = Kitten.find(params[:id]) 
+    kitten = Kitten.find(params[:id])
     if kitten.destroy
       redirect_to root_path, success: 'Kitten succesfully deleted.'
     else
       redirect_back(fallback_location: root_path,
-                    alert: 'This kitten could not be deleted.')
+                    flash: { alert: 'This kitten could not be deleted.' })
     end
   end
-  
+
   private
 
   def kitten_params
