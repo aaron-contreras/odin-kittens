@@ -17,7 +17,7 @@ class KittensController < ApplicationController
   def create
     @kitten = Kitten.new(kitten_params)
     if @kitten.save
-      redirect_to @kitten, success: 'Kitten succesfully created.'
+      redirect_to @kitten, flash: { success: 'Kitten succesfully created.' }
     else
       flash.now[:alert] = 'This kitten could not be created.'
       render :new
@@ -41,10 +41,10 @@ class KittensController < ApplicationController
   def destroy
     kitten = Kitten.find(params[:id])
     if kitten.destroy
-      redirect_to root_path, success: 'Kitten succesfully deleted.'
+      redirect_to root_path, flash: { success: 'Kitten succesfully deleted.' }
     else
-      redirect_back(fallback_location: root_path,
-                    flash: { alert: 'This kitten could not be deleted.' })
+      redirect_back fallback_location: root_path,
+                    flash: { alert: 'This kitten could not be deleted.' }
     end
   end
 

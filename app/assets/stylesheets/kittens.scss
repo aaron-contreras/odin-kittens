@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+body {
+  margin: 0
+}
+
 .field {
   width: 50%;
   display: flex;
@@ -28,4 +32,19 @@ input {
   width: 100%;
 }
 
+.notification {
+  background: green;
+  padding: 5px 0;
+  p {
+    color: white;
+    text-align: center;
+    margin: 0;
+  }
+}
 
+table, th, td {
+  border: 1px solid darkgrey;;
+  td {
+    padding: 10px;
+  }
+}
