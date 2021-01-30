@@ -11,5 +11,8 @@
     <td><%= @kitten.age %></td>
     <td><%= @kitten.cuteness %></td>
     <td><%= @kitten.softness %></td>
+    <td>
+      <%= link_to 'Delete', kitten_path(@kitten), method: :delete %>
+    </td>
   </tr>
 </table>

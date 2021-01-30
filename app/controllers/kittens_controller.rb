@@ -18,7 +18,7 @@ class KittensController < ApplicationController
     if @kitten.save
       redirect_to @kitten, success: 'Kitten succesfully created.'
     else
-      render :new, alert: 'An error occured while creating this kitten.' 
+      render :new, alert: 'This kitten could not be created.' 
     end  
   end
 
@@ -31,12 +31,18 @@ class KittensController < ApplicationController
     if @kitten.update(kitten_params)
       redirect_to @kitten, success: 'Kitten succesfully updated.'
     else
-      render :edit, alert: 'An error occured while udpating this kitten.'
+      render :edit, alert: 'This kitten could not be updated.'
     end
   end
   
   def destroy
-    
+    kitten = Kitten.find(params[:id]) 
+    if kitten.destroy
+      redirect_to root_path, success: 'Kitten succesfully deleted.'
+    else
+      redirect_back(fallback_location: root_path,
+                    alert: 'This kitten could not be deleted.')
+    end
   end
   
   private
