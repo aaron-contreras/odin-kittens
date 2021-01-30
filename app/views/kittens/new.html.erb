@@ -1,26 +1,2 @@
 <h2>Create a kitten</h2>
-<%= form_with model: @kitten do |f| %>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :age %>
-    <%= f.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cuteness %>
-    <%= f.number_field :cuteness %>
-  </div>
-
-  <div class="field">
-    <%= f.label :softness%>
-    <%= f.number_field :softness %>
-  </div>
-
-  <div class="field">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= render partial: "kittens/form", locals: { kitten: @kitten } %>
